@@ -1,3 +1,8 @@
+#include "gba_input.h"
+
+//set the extern valuse for key values
+u16 __currKeys = 0, __prevKeys = 0;
+
 int main(void) {
 	// Write into the I/O registers, setting video display parameters.
 	volatile unsigned char *ioram = (unsigned char *)0x04000000;
@@ -11,7 +16,12 @@ int main(void) {
 	vram[80*240 + 125] = 0x7C00; // X = 125, Y = 80, C = 111110000000000 = B
 
 	// Wait forever
-	while(1);
+	while(1) {
+		PollKeys();
+		if (keyDown(A)) {
+			vram[80*240 + 130] = 0b111111111111111;
+		}
+	}
 
 	return 0;
 }
