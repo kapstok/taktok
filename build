@@ -1,6 +1,7 @@
 #!/bin/bash
 
 /opt/devkitpro/devkitARM/bin/arm-none-eabi-gcc -c -Iinclude main.c -mthumb-interwork -mthumb -O2 -o main.o
-/opt/devkitpro/devkitARM/bin/arm-none-eabi-gcc main.o -mthumb-interwork -mthumb -specs=gba.specs -o main.elf
+/opt/devkitpro/devkitARM/bin/arm-none-eabi-gcc -c -Iinclude img/mushroom.c -mthumb-interwork -mthumb -O2 -o img.o
+/opt/devkitpro/devkitARM/bin/arm-none-eabi-gcc main.o img.o -mthumb-interwork -mthumb -specs=gba.specs -o main.elf
 /opt/devkitpro/devkitARM/bin/arm-none-eabi-objcopy -v -O binary main.elf main.gba
 /opt/devkitpro/tools/bin/gbafix main.gba

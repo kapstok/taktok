@@ -1,4 +1,10 @@
 #include "gba_input.h"
+#include "img/mushroom.h"
+
+#define VIDEOMODE_3 0x0003
+#define BGMODE_2 0x400
+#define SCREENBUFFER ((u16*)(0x06000000))
+#define REG_DISPCNT *((v_u32*)(0x04000000))
 
 //set the extern valuse for key values
 u16 __currKeys = 0, __prevKeys = 0;
@@ -19,7 +25,9 @@ int main(void) {
 	while(1) {
 		PollKeys();
 		if (keyDown(A)) {
-			vram[80*240 + 130] = 0b111111111111111;
+//			vram[80*240 + 130] = 0b111111111111111;
+			memcpy(SCREENBUFFER, mushroomBitmap, mushroomBitmapLen);
+			REG_DISPCNT = VIDEOMODE_3 | BGMODE_2;
 		}
 	}
 
