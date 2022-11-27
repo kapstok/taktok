@@ -17,6 +17,8 @@ typedef unsigned long __PTRDIFF_TYPE__;
 
 #define INLINE static inline
 
+#define ARM __attribute__((__target__("arm")))
+#define THUMB __attribute__((__target__("thumb")))
 
 #ifndef	NULL
 #define	NULL	(void*)0

@@ -1,7 +1,19 @@
 #!/bin/bash
 
-/opt/devkitpro/devkitARM/bin/arm-none-eabi-gcc -c -Iinclude main.c -mthumb-interwork -mthumb -O2 -o main.o
-/opt/devkitpro/devkitARM/bin/arm-none-eabi-gcc -c -Iinclude img/mushroom.c -mthumb-interwork -mthumb -O2 -o img.o
-/opt/devkitpro/devkitARM/bin/arm-none-eabi-gcc main.o img.o -mthumb-interwork -mthumb -specs=gba.specs -o main.elf
-/opt/devkitpro/devkitARM/bin/arm-none-eabi-objcopy -v -O binary main.elf main.gba
+mkdir generated
+/opt/devkitpro/devkitARM/bin/arm-none-eabi-gcc -c -Iinclude -Iimg source/main.c -mthumb-interwork -mthumb -O2 -o generated/main.o
+/opt/devkitpro/devkitARM/bin/arm-none-eabi-gcc -c -Iinclude -Iimg source/gba_bios.c -mthumb-interwork -mthumb -O2 -o generated/bios.o
+/opt/devkitpro/devkitARM/bin/arm-none-eabi-gcc -c -Iinclude -Iimg source/gba_drawing.c -mthumb-interwork -mthumb -O2 -o generated/drawing.o
+/opt/devkitpro/devkitARM/bin/arm-none-eabi-gcc -c -Iinclude -Iimg source/gba_gfx.c -mthumb-interwork -mthumb -O2 -o generated/gfx.o
+/opt/devkitpro/devkitARM/bin/arm-none-eabi-gcc -c -Iinclude -Iimg source/gba_input.c -mthumb-interwork -mthumb -O2 -o generated/input.o
+/opt/devkitpro/devkitARM/bin/arm-none-eabi-gcc -c -Iinclude -Iimg source/gba_mathUtil.c -mthumb-interwork -mthumb -O2 -o generated/mathUtil.o
+
+mkdir img
+pushd img
+/opt/devkitpro/tools/bin/grit ../char\ free/mushroom.png -gb -gB8 -ftc -gu16
+popd
+/opt/devkitpro/devkitARM/bin/arm-none-eabi-gcc -c -Iinclude -Iimg img/test.c -mthumb-interwork -mthumb -O2 -o generated/test.o
+
+/opt/devkitpro/devkitARM/bin/arm-none-eabi-gcc generated/main.o generated/bios.o generated/drawing.o generated/gfx.o generated/input.o generated/mathUtil.o generated/test.o -mthumb-interwork -mthumb -specs=gba.specs -o generated/main.elf
+/opt/devkitpro/devkitARM/bin/arm-none-eabi-objcopy -v -O binary generated/main.elf main.gba
 /opt/devkitpro/tools/bin/gbafix main.gba

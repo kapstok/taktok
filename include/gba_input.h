@@ -55,7 +55,7 @@ INLINE u16		keyDown(u16 a_key)       { return __currKeys & a_key; }
 INLINE u16		keyUp(u16 a_key)         { return ~__currKeys & a_key; }
 INLINE u16		keyHeld(u16 a_key)       { return (__currKeys & __prevKeys) & a_key; }
 INLINE u16		keyReleased(u16 a_key)   { return (~__currKeys & __prevKeys) & a_key; }
-INLINE u16		keyHit(u16 a_key)        { return (__currKeys & ~__prevKeys) & a_key; }
+INLINE u16		keyPressed(u16 a_key)    { return (__currKeys & ~__prevKeys) & a_key; }
 INLINE u16		keyStateChange(u16 a_key){ return (__currKeys ^ __prevKeys) & a_key; }
 
 typedef enum AXIS

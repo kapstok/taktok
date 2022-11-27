@@ -1,3 +1,5 @@
 *.gba
 *.elf
 *.o
+.vscode
+img/
