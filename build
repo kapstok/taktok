@@ -10,7 +10,7 @@ mkdir generated
 
 mkdir img
 pushd img
-/opt/devkitpro/tools/bin/grit ../char\ free/mushroom.png -gb -gB8 -ftc -gu16
+/opt/devkitpro/tools/bin/grit ../char\ free/test.png -gb -gB8 -ftc -gu16
 popd
 /opt/devkitpro/devkitARM/bin/arm-none-eabi-gcc -c -Iinclude -Iimg img/test.c -mthumb-interwork -mthumb -O2 -o generated/test.o
 
