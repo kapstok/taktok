@@ -67,3 +67,4 @@ https://gbadev.net/
 https://git.brainbaking.com/wgroeneveld/gba-bitmap-engine/
 http://www.coranac.com/tonc/text/toc.htm
 https://jamiedstewart.github.io/gba%20dev/2019/03/21/GBA-Dev-Input-Handling.html
+https://gvaliente.github.io/butano/faq.html#faq_transparent_color
